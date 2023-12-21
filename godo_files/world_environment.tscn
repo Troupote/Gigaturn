@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq5ge3xxnwujg"]
+
+[sub_resource type="Environment" id="Environment_6iifs"]
+background_mode = 1
+background_energy_multiplier = 11.05
+ambient_light_source = 3
+ambient_light_color = Color(0.976471, 0.976471, 0.976471, 1)
+ambient_light_energy = 8.07
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_y5wy8"]
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_nv6vh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4s66v"]
+resource_name = "Sol"
+rough = true
+
+[sub_resource type="Environment" id="Environment_7xkxh"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ff7k0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e8xqg"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_6iifs")
+camera_attributes = SubResource("CameraAttributesPractical_y5wy8")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_nv6vh")
+physics_material = SubResource("PhysicsMaterial_4s66v")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81191, 1.92987, 0)
+floor_constant_speed = true
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.928453, 0.371449, 0, -0.371449, 0.928453, -0.788714, 1.75503, 1.80789)
+environment = SubResource("Environment_7xkxh")
+attributes = SubResource("CameraAttributesPhysical_ff7k0")
+current = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.620883, 0.623632, 0)
+shape = SubResource("CapsuleShape3D_e8xqg")
